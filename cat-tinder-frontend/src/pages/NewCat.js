@@ -5,7 +5,9 @@ import {
   ControlLabel,
   FormGroup,
   FormControl,
-  Row
+  Row,
+  Grid,
+  PageHeader,
 } from 'react-bootstrap'
 
 class NewCat extends Component {
@@ -32,58 +34,69 @@ class NewCat extends Component {
 
   render() {
     return (
-      <form>
-        <Row>
-          <Col xs={6}>
-            <FormGroup>
-              <ControlLabel id="name">Name</ControlLabel>
-              <FormControl
-                type="text"
-                name="name"
-                value={this.state.form.name}
-                onChange={this.handleChange.bind(this)}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
+        <Grid>
+            <PageHeader>
+              <Row>
+                <Col xs={8}>
+                  Cat Tinder
+                  <small className='subtitle'>Add a Cat</small>
+                </Col>
+              </Row>
+            </PageHeader>
 
-        <Row>
-          <Col xs={6}>
-            <FormGroup>
-              <ControlLabel id="age">Age</ControlLabel>
-              <FormControl
-                type="number"
-                name="age"
-                value={this.state.form.age}
-                onChange={this.handleChange.bind(this)}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
+            <form>
+                <Row>
+                  <Col xs={6}>
+                    <FormGroup>
+                      <ControlLabel id="name">Name</ControlLabel>
+                      <FormControl
+                        type="text"
+                        name="name"
+                        value={this.state.form.name}
+                        onChange={this.handleChange.bind(this)}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
 
-        <Row>
-          <Col xs={6}>
-            <FormGroup>
-              <ControlLabel id="enjoys">Enjoys</ControlLabel>
-              <FormControl
-                componentClass='textarea'
-                name="enjoys"
-                value={this.state.form.enjoys}
-                onChange={this.handleChange.bind(this)}
-              />
-            </FormGroup>
-          </Col>
-        </Row>
+                <Row>
+                  <Col xs={6}>
+                    <FormGroup>
+                      <ControlLabel id="age">Age</ControlLabel>
+                      <FormControl
+                        type="number"
+                        name="age"
+                        value={this.state.form.age}
+                        onChange={this.handleChange.bind(this)}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
 
-        <Row>
-          <Col xs={6}>
-            <Button
-              onClick={this.handleSubmit.bind(this)}
-            id="submit">Create Cat Profile</Button>
-          </Col>
-        </Row>
+                <Row>
+                  <Col xs={6}>
+                    <FormGroup>
+                      <ControlLabel id="enjoys">Enjoys</ControlLabel>
+                      <FormControl
+                        componentClass='textarea'
+                        name="enjoys"
+                        value={this.state.form.enjoys}
+                        onChange={this.handleChange.bind(this)}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
 
-      </form>
+                <Row>
+                  <Col xs={6}>
+                    <Button
+                      onClick={this.handleSubmit.bind(this)}
+                    id="submit">Create Cat Profile</Button>
+                  </Col>
+                </Row>
+
+            </form>
+        </Grid>
     )
   }
 }

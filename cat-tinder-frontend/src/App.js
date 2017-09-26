@@ -67,16 +67,8 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route exact path="/" render={props => (
+            <Route exact path="/" render={props => (
             <Grid>
-              <PageHeader>
-                <Row>
-                  <Col xs={8}>
-                    Cat Tinder
-                    <small className='subtitle'>Add a Cat</small>
-                  </Col>
-                </Row>
-              </PageHeader>
               <NewCat
                 onSubmit={this.handleNewcat.bind(this)}
                 errors={this.state.errors && this.state.errors.validations}
@@ -86,18 +78,11 @@ class App extends Component {
               }
 
             </Grid>
-          )} />
-
-            <Route exact path="/cats" render={props => (
-
-                <Cats cats={this.state.cats} />
-
-                // {!this.state.newCatSuccess &&
-                //     <Redirect to="/" />
-                // }
-
             )} />
 
+            <Route exact path="/cats" render={props => (<Cats cats={this.state.cats} />
+                // {!this.state.newCatSuccess && <Redirect to="/" /> }
+            )} />
             <Route path="/cat/:id" component={Profile} />
         </div>
       </Router>
