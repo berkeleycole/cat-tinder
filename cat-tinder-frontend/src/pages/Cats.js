@@ -1,38 +1,25 @@
 import React, { Component } from 'react';
-import {
-  Col,
-  ListGroup,
-  ListGroupItem,
-  Row
-} from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 class Cats extends Component {
   render() {
     return (
-      <Row>
-        <Col xs={12}>
-          <ListGroup>
+        <div>
+            <h1>All Cats</h1>
+            <ul>
             {this.props.cats.map((cat, index) =>{
-              return (
-                <ListGroupItem
-                  key={index}
-                  header={
-                    <h4>
-                      <span className='cat-name'>
-                        {cat.name}
-                      </span>
-                      - <small className='cat-age'>{cat.age} years old</small>
-                    </h4>
-                  }>
-                  <span className='cat-enjoys'>
-                    {cat.enjoys}
-                  </span>
-                </ListGroupItem>
-              )
+                return (
+                    <li key={index}>
+                        <Link to={`/cat/${cat.id}`}>
+                            <div>
+                                <h4 className='cat-name'>{cat.name}</h4>
+                            </div>
+                        </Link>
+                    </li>
+                )
             })}
-          </ListGroup>
-        </Col>
-      </Row>
+            </ul>
+        </div>
     );
   }
 }

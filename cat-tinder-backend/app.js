@@ -21,6 +21,16 @@ app.get('/cats', (req, res) => {
   })
 })
 
+app.get('/cat/:id', (req, res) => {
+  Cat.findAll({
+    where: {
+        id: req.params["id"],
+    }
+  }).then( (cat) =>{
+    res.json(cat)
+  })
+})
+
 app.post('/cats', (req, res) => {
   req.checkBody('name', 'Is required').notEmpty()
   req.checkBody('age', 'Is required').notEmpty()
