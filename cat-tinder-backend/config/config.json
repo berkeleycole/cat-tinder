@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "rob",
+    "username": "postgres",
     "password": null,
     "database": "cat_tinder_development",
     "host": "127.0.0.1",
