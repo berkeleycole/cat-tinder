@@ -1,0 +1,69 @@
+1) yarn add react-redux redux-logger redux-thunk
+2) make two directories in src, one for actions and one for reducers
+3) make a store.js file in src
+import {createStore, applyMiddleware} from 'redux'
+import combinedReducer from './reducers'
+import logger from 'redux-logger'
+import thunk from 'redux-thunk'
+
+export default createStore(combinedReducer, applyMiddleware(thunk, logger))
+
+4) add actions
+move a state changing function from React to the actions file and make it dispatch instead of directly updating state
+
+5) add reducers
+  a) create reducers/index.js
+  import userReducer from './userReducer.js'
+  import {combineReducers} from 'redux'
+
+  export default combineReducers({
+    user: userReducer
+  })
+
+  b) create our first reducer
+  const initialState = {
+    user: null,
+    error: null
+  }
+  export default (currentState=initialState, action) =>{
+    let newState
+    switch(action.type){
+      case("FETCHED_USER"):{
+        newState = Object.assign(
+          {},
+          currentState,
+          {user: action.payload, error: null}
+        )
+        break
+      }
+      case("FETCHED_USER_ERROR"):{
+        newState = Object.assign(
+          {},
+          currentState,
+          {user: null, error: action.payload}
+        )
+        break
+      }
+      default:
+        newState = currentState
+
+    }
+    return newState
+  }
+
+6) Connect the application to the store
+  a) edit index.js
+  import {Provider} from 'react-redux'
+  import store from './store'
+  ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
+
+  b) edit App.js
+  const mapComponentToProps = (store) =>{
+    return {
+      user: store.user.currentUser,
+      userError: store.user.error
+    }
+  }
+
+  export default connect(mapComponentToProps)(
+  // Remove default export from bottom
