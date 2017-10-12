@@ -33,15 +33,20 @@ app.get('/cat/:id', (req, res) => {
 })
 
 app.post('/user', (req, res) => {
-  req.checkBody('email', 'Is required').notEmpty()
+  req.checkBody('authToken', 'Is required').notEmpty()
 
   req.getValidationResult()
     .then((validationErrors) =>{
       if(validationErrors.isEmpty()){
         // find user by email
-        User.find({ where: {email: req.body.email} }).then((user) => {
+        User.find({ where: {authToken: req.body.authToken} }).then((user) => {
+          if(user.authExpired()){
+            res.status(400)
+            res.json({errors: {message: "Please log in again"}})
+          } else {
             res.status(201)
             res.json({user: user})
+          }
         }).catch((error) => {
           res.status(400)
           res.json({errors: {message: "User not found"}})
@@ -64,9 +69,12 @@ app.post('/login', (req, res) => {
         User.find({ where: {email: req.body.email} }).then((user) => {
             // check users password
             if(user.verifyPassword(req.body.password)){
-              // return user if success
-              res.status(201)
-              res.json({user: user})
+              user.setAuthToken()
+              user.save().then((user) => {
+                // return user if success
+                res.status(201)
+                res.json({user: user})
+              })
             } else {
               res.status(400)
               res.json({errors: {message: "User not found"}})

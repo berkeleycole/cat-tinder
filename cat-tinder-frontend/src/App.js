@@ -32,11 +32,11 @@ class App extends Component {
         this.handleCheckLogin()
     }
     handleCheckLogin(){
-      var userEmail = localStorage.getItem('userEmail');
-      if(userEmail){
+      var authToken = localStorage.getItem('authToken');
+      if(authToken){
         fetch(`${this.state.apiUrl}/user`,
             {
-                body: JSON.stringify({email: userEmail}),
+                body: JSON.stringify({authToken: authToken}),
                 headers: {
                   'Content-Type': 'application/json'
                 },
@@ -77,7 +77,7 @@ class App extends Component {
           if(parsedResponse.errors){
               this.setState({errors: parsedResponse.errors})
           }else{
-            localStorage.setItem('userEmail', parsedResponse.user.email);
+            localStorage.setItem('authToken', parsedResponse.user.authToken);
               this.setState({
                 user: parsedResponse.user,
                 errors: null,
