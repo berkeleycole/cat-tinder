@@ -6,15 +6,17 @@ var validator = require('express-validator')
 var app = express();
 var Cat = require('./models').Cat
 var User = require('./models').User
+var path = require('path')
 
 app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(validator())
 app.use(cors())
+app.use(express.static(path.resolve(__dirname, '../cat-tinder-frontend/build')));
 
-app.get('/', (req, res) => {
-  res.json({message: 'API Example App'})
-});
+// app.get('/', (req, res) => {
+//   res.json({message: 'API Example App'})
+// });
 
 app.get('/cats', (req, res) => {
   Cat.findAll().then( (cats) =>{
@@ -136,5 +138,9 @@ app.post('/cats', (req, res) => {
       }
     })
 })
+
+app.get('*', function(request, response) {
+  response.sendFile(path.resolve(__dirname, '../cat-tinder-frontend/build', 'index.html'));
+});
 
 module.exports = app
