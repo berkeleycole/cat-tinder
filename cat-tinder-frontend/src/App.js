@@ -41,7 +41,7 @@ class App extends Component {
     handleCheckLogin(){
       var authToken = localStorage.getItem('authToken');
       if(authToken){
-        fetch(`${this.state.apiUrl}/api/user`,
+        fetch(`${this.state.apiUrl}api/user`,
             {
                 body: JSON.stringify({authToken: authToken}),
                 headers: {
@@ -68,7 +68,7 @@ class App extends Component {
     }
 
     handleUserLogin(params){
-      fetch(`${this.state.apiUrl}/api/login`,
+      fetch(`${this.state.apiUrl}api/login`,
           {
               body: JSON.stringify(params),
               headers: {
@@ -95,7 +95,7 @@ class App extends Component {
     }
 
     handleNewUser(params){
-      fetch(`${this.state.apiUrl}/api/signup`,
+      fetch(`${this.state.apiUrl}api/signup`,
           {
               body: JSON.stringify(params),
               headers: {
@@ -121,7 +121,7 @@ class App extends Component {
     }
 
     handleNewcat(params){
-        fetch(`${this.state.apiUrl}/api/cats`,
+        fetch(`${this.state.apiUrl}api/cats`,
             {
                 body: JSON.stringify(params),
                 headers: {
@@ -149,7 +149,7 @@ class App extends Component {
     }
 
     componentWillMount(){
-        fetch(`${this.state.apiUrl}/api/cats`)
+        fetch(`${this.state.apiUrl}api/cats`)
         .then((rawResponse) =>{
           return rawResponse.json()
         })
