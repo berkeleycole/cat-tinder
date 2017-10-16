@@ -18,13 +18,13 @@ app.use(express.static(path.resolve(__dirname, '../cat-tinder-frontend/build')))
 //   res.json({message: 'API Example App'})
 // });
 
-app.get('/cats', (req, res) => {
+app.get('/api/cats', (req, res) => {
   Cat.findAll().then( (cats) =>{
     res.json({cats:cats})
   })
 })
 
-app.get('/cat/:id', (req, res) => {
+app.get('/api/cat/:id', (req, res) => {
   Cat.findAll({
     where: {
         id: req.params["id"],
@@ -34,7 +34,7 @@ app.get('/cat/:id', (req, res) => {
   })
 })
 
-app.post('/user', (req, res) => {
+app.post('/api/user', (req, res) => {
   req.checkBody('authToken', 'Is required').notEmpty()
 
   req.getValidationResult()
@@ -60,7 +60,7 @@ app.post('/user', (req, res) => {
     })
 })
 
-app.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
   req.checkBody('email', 'Is required').notEmpty()
   req.checkBody('password', 'Is required').notEmpty()
 
@@ -92,7 +92,7 @@ app.post('/login', (req, res) => {
     })
 })
 
-app.post('/signup', (req, res) => {
+app.post('/api/signup', (req, res) => {
   req.checkBody('name', 'Is required').notEmpty()
   req.checkBody('email', 'Is required').notEmpty()
   req.checkBody('password', 'Is required').notEmpty()
@@ -116,7 +116,7 @@ app.post('/signup', (req, res) => {
     })
 })
 
-app.post('/cats', (req, res) => {
+app.post('/api/cats', (req, res) => {
   req.checkBody('name', 'Is required').notEmpty()
   req.checkBody('age', 'Is required').notEmpty()
   req.checkBody('enjoys', 'Is required').notEmpty()
