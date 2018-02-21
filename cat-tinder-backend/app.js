@@ -6,11 +6,13 @@ var validator = require('express-validator')
 var app = express()
 var Cat = require('./models').Cat
 var User = require('./models').User
+var path = require('path')
 
 app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(validator())
 app.use(cors())
+app.use(express.static(path.resolve(__dirname, '../cat-tinder-frontend/build')));
 
 app.get('/api/cats', (req, res) => {
   Cat.findAll().then( (cats) =>{
@@ -133,8 +135,8 @@ app.post('/api/cats', (req, res) => {
     })
 })
 
-app.get('*', (req, res) => {
-	res.sendFile(path.resolve(__dirname, '../cat-tinder-frontend/build', 'index.html'))
-})
+app.get('*', function(request, response) {
+  response.sendFile(path.resolve(__dirname, '../cat-tinder-frontend/build', 'index.html'));
+});
 
 module.exports = app

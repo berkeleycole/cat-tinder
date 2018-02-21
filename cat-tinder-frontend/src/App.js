@@ -16,13 +16,19 @@ import NewCat from './pages/NewCat'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 
-const API = "/api"
+var apiUrl
+if(process.env.NODE_ENV === 'production'){
+  apiUrl = "/"
+} else {
+  apiUrl = "http://localhost:3000/"
+}
 
 class App extends Component {
     constructor(props){
         super(props)
 
         this.state = {
+          apiUrl: apiUrl,
           cats: [],
           newCatSuccess: false,
           user: null,
@@ -35,7 +41,7 @@ class App extends Component {
     handleCheckLogin(){
       var authToken = localStorage.getItem('authToken');
       if(authToken){
-        fetch(`${API}/user`,
+        fetch(`${this.state.apiUrl}api/user`,
             {
                 body: JSON.stringify({authToken: authToken}),
                 headers: {
@@ -62,7 +68,7 @@ class App extends Component {
     }
 
     handleUserLogin(params){
-      fetch(`${API}/login`,
+      fetch(`${this.state.apiUrl}api/login`,
           {
               body: JSON.stringify(params),
               headers: {
@@ -89,7 +95,7 @@ class App extends Component {
     }
 
     handleNewUser(params){
-      fetch(`${API}/signup`,
+      fetch(`${this.state.apiUrl}api/signup`,
           {
               body: JSON.stringify(params),
               headers: {
@@ -115,7 +121,7 @@ class App extends Component {
     }
 
     handleNewcat(params){
-        fetch(`${API}/cats`,
+        fetch(`${this.state.apiUrl}api/cats`,
             {
                 body: JSON.stringify(params),
                 headers: {
@@ -143,7 +149,7 @@ class App extends Component {
     }
 
     componentWillMount(){
-        fetch(`${API}/cats`)
+        fetch(`${this.state.apiUrl}api/cats`)
         .then((rawResponse) =>{
           return rawResponse.json()
         })
