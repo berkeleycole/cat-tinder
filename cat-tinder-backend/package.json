@@ -5,8 +5,7 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "test": "jest",
-        "start": "PORT=3000 node index.js"
+        "test": "jest"
     },
     "dependencies": {
         "body-parser": "^1.17.2",
