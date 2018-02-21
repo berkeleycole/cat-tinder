@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 
+const API = "/api"
+
 class Profile extends Component {
     constructor(props){
         super(props)
         this.state = {
-            apiUrl: "http://localhost:3000/api",
             id: this.props.location.pathname,
         }
     console.log(this.state)
     }
 
     componentWillMount(){
-        fetch(`${this.state.apiUrl}/${this.state.id}`)
+        fetch(`${API}/${this.state.id}`)
         .then((rawResponse) =>{
           return rawResponse.json()
         })
