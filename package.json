@@ -5,8 +5,8 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node cat-tinder-backend/index.js",
-        "heroku-postbuild": "cd cat-tinder-backend && sequelize db:migrate && cd .. && cd cat-tinder-frontend/ && yarn install && yarn build"
+        "start": "node PORT=3000 cat-tinder-backend/index.js",
+        "heroku-postbuild": "cd cat-tinder-backend && sequelize db:migrate && cd ../cat-tinder-frontend/ && yarn install && yarn build"
     },
     "author": "",
     "license": "ISC",
