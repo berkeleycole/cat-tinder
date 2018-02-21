@@ -11,9 +11,9 @@ app.use(bodyParser.json())
 app.use(validator())
 app.use(cors())
 
-app.get('/', (req, res) => {
-  res.json({message: 'API Example App'})
-});
+// app.get('/', (req, res) => {
+//   res.json({message: 'API Example App'})
+// });
 
 app.get('/cats', (req, res) => {
   Cat.findAll().then( (cats) =>{
@@ -119,7 +119,7 @@ app.post('/cats', (req, res) => {
   req.checkBody('enjoys', 'Is required').notEmpty()
 
   req.getValidationResult()
-    .then((validationErrors) =>{
+    .then((validationErrors) => {
       if(validationErrors.isEmpty()){
         Cat.create({
           name: req.body.name,
@@ -134,6 +134,10 @@ app.post('/cats', (req, res) => {
         res.json({errors: {validations: validationErrors.array()}})
       }
     })
+})
+
+app.get('*', (req, res) => {
+	res.sendFile(path.resolve(__dirname, '../cat-tinder-frontend/build', 'index.html'))
 })
 
 module.exports = app
