@@ -21,7 +21,7 @@ class App extends Component {
         super(props)
 
         this.state = {
-          apiUrl: "http://localhost:3000",
+          apiUrl: "http://localhost:3000/api",
           cats: [],
           newCatSuccess: false,
           user: null,

@@ -4,14 +4,14 @@ class Profile extends Component {
     constructor(props){
         super(props)
         this.state = {
-            apiUrl: "http://localhost:3000",
+            apiUrl: "http://localhost:3000/api",
             id: this.props.location.pathname,
         }
     console.log(this.state)
     }
 
     componentWillMount(){
-        fetch(`${this.state.apiUrl}${this.state.id}`)
+        fetch(`${this.state.apiUrl}/${this.state.id}`)
         .then((rawResponse) =>{
           return rawResponse.json()
         })
