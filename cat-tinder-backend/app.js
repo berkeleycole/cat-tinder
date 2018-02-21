@@ -1,8 +1,9 @@
-var express = require('express');
+var path = require('path')
+var express = require('express')
 var bodyParser = require('body-parser')
 var cors = require('cors')
 var validator = require('express-validator')
-var app = express();
+var app = express()
 var Cat = require('./models').Cat
 var User = require('./models').User
 
